@@ -30,7 +30,7 @@ async fn fetch(url: &str) -> anyhow::Result<Vec<AnimalData>> {
 
 // How to async main.
 #[tokio::main]
-async fn main(){
+async fn main() {
     let json = fetch("https://raw.githubusercontent.com/gist-rs/book/main/examples/r4/20-fetch-json-reqwest/src/foo.json").await;
     println!("Response data: {json:#?}");
 
@@ -39,9 +39,9 @@ async fn main(){
     let filename = "expected_response.json";
     let expected_json_path = current_dir.join(filename);
 
-
     let json_content = fs::read_to_string(expected_json_path).expect("Unable to read file");
-    let expected_data: Vec<AnimalData> = serde_json::from_str(&json_content).expect("Unable to parse json data to struct");
+    let expected_data: Vec<AnimalData> =
+        serde_json::from_str(&json_content).expect("Unable to parse json data to struct");
 
-    assert_eq!(json.unwrap(), expected_data);   
+    assert_eq!(json.unwrap(), expected_data);
 }
